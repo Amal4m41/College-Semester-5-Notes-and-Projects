@@ -6,9 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo "Calendar" ?></title>
 </head>
+<style>
+.content {
+  max-width: 660px;
+  margin: auto;
+}
+.aligncenter {
+    text-align: center;
+}
+
+</style>
 <body>
 
-
+<div class='aligncenter'>
+    <h1>Calendar</h1>
+</div>
+<div class="content">
 <?php
 
 // $presentDay = date('j');  //value between 1-31
@@ -88,24 +101,28 @@ echo "<br>";
 // var_dump($noOfRows);
 
 function showCalendar($_noOfRows, $_noOfDaysPresentMonth,$_firstDayInWeek,$_presentDay=-1){
-    echo "<table border='1' cellpadding='10'>";
-    echo "<td>Sunday</td><td>Monday</td><td>Tuesday</td><td>Wednesday</td><td>Thursday</td><td>Friday</td><td>Saturday</td>";
+    
+    echo "<table border='1' cellpadding='20' >";
+    echo "<td bgcolor='FF706B'>Sunday</td><td bgcolor='E0FFF4'>Monday</td><td bgcolor='E0FFF4'>Tuesday</td>
+    <td bgcolor='E0FFF4'>Wednesday</td><td bgcolor='E0FFF4'>Thursday</td><td bgcolor='E0FFF4'>Friday</td><td bgcolor='FF706B'>Saturday</td>";
     $day=1;
     for($i=0; $i<$_noOfRows;$i++){
         echo "<tr>";
+
+        
         for($j=0; $j<7;$j++){
+
+            $bgcolor = ($_presentDay==$day) ? "B0EEA9" : "#FFE5B4";
+
             if($_firstDayInWeek<=$j && $day<=$_noOfDaysPresentMonth){
-                if($_presentDay==$day){
-                    echo "<td>sdfs</td>";
-                }
-                else{
-                    echo "<td>$day</td>";
-                }
+
+                echo "<td bgcolor='$bgcolor'>$day</td>";
+
                 $_firstDayInWeek=0;
                 $day++;
             }
             else{
-                echo "<td></td>";
+                echo "<td bgcolor='$bgcolor'></td>";
             }
         }
         echo "</tr>";
@@ -122,9 +139,13 @@ $prevYear = ($month==1)? $year-1 : $year;
 $prevMonth = ($month==1)? 12 : $month-1;
 
 // var_dump($prevMonth,$nextMonth);
-echo "<br><a href='calendar.php?month=$prevMonth&year=$prevYear'><</a>
-<a href='calendar.php?month=$nextMonth&year=$nextYear'>></a>";
+echo "<p class='aligncenter'>";
+echo "<br><a href='calendar.php?month=$prevMonth&year=$prevYear'><img height=100 src='left_arrow.png'></a>
+<a href='calendar.php?month=$nextMonth&year=$nextYear'><img height=100 src='right_arrow.jpg'></a>";
+echo "</p>";
+
 ?>
+</div>
 
 
 </body>
